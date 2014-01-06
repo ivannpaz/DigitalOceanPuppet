@@ -6,6 +6,8 @@ def apply():
     sudo('puppet apply --modulepath /usr/local/puppet/modules /usr/local/puppet/manifests/site.pp')
 
 def setup_client():
+    sudo('sed -i "s/mirrors.digitalocean/archive\.ubuntu/g" /etc/apt/sources.list')
+    #sudo('sudo sed -i "s/archive\.ubuntu/mirrors.digitalocean/g" /etc/apt/sources.list')
     sudo('apt-get update')
     sudo('apt-get install -y puppet')
     sudo('mkdir -p /usr/local/puppet')
