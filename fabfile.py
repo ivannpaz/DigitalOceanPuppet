@@ -1,16 +1,28 @@
 from fabric.api import *
 from fabric.contrib.project import rsync_project
 
+#
+# Task: apply
+#
+# Apply the current puppet configuration to the target host
+#
 def apply():
     rsync_project(remote_dir='/usr/local/puppet', local_dir='.', extra_opts='--delete')
     sudo('puppet apply --modulepath /usr/local/puppet/modules /usr/local/puppet/manifests/site.pp')
 
+#
+# Task: setup
+#
+# Remotely configure the host in preparation for the "apply" task
 def setup():
     update_puppetlabs()
     force_ubuntu_repos()
     install_puppet()
     update_gems()
 
+#
+# Helper methods
+#
 def update_puppetlabs():
     sudo('wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb -P /var/tmp')
     sudo('dpkg -i /var/tmp/puppetlabs-release-precise.deb')
