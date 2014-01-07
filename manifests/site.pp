@@ -5,7 +5,8 @@ class server_config {
     include ::ntp
     include ::apt
     include ::ruby
-    include ::nodejs
+    #include ::nodejs
+    include php::fpm
 
     #server specific configs
     include sudo
