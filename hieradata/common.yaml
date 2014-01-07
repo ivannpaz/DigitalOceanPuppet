@@ -1,2 +1,4 @@
-assh:
-    public_key: '-OVERRIDE-'
+ssh:
+    user: 'deployer'
+    password: 'IGNORED'
+    public_key: '-UNSPECIFIED-'

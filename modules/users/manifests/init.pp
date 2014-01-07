@@ -1,19 +1,25 @@
 class users {
 
-    user { 'deployer':
+    $ssh = hiera('ssh', false)
+
+    if !is_hash($ssh) {
+        fail('SSH Configuration not found in hierdata providers')
+    }
+
+    $user = $ssh['user']
+
+    user { $ssh['user']:
         ensure => 'present',
         groups => ['sudo'],
-        home => '/home/deployer',
+        home => "/home/{$user}",
         managehome => true,
-        password => '-disallowed-',
+        password => $ssh['password'],
         shell => '/bin/bash',
     }
 
-    $ssh = hiera('ssh', false)
-
-    ssh_authorized_key { 'deployer':
+    ssh_authorized_key { $user :
         ensure => 'present',
-        user => 'deployer',
+        user => $user,
         type => 'rsa',
         key => $ssh['public_key'],
     }

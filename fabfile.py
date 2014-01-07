@@ -9,6 +9,7 @@ def setup():
     update_puppetlabs()
     force_ubuntu_repos()
     install_puppet()
+    update_gems()
 
 def update_puppetlabs():
     sudo('wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb -P /var/tmp')
@@ -23,3 +24,6 @@ def install_puppet():
     sudo('apt-get install -y puppet-common')
     sudo('mkdir -p /usr/local/puppet')
     sudo('chown -R root /usr/local/puppet')
+
+def update_gems():
+    sudo('gem install deep_merge')
