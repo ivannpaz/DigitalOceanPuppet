@@ -14,6 +14,7 @@ def apply():
 # Task: setup
 #
 # Remotely configure the host in preparation for the "apply" task
+#
 def setup():
     update_puppetlabs()
     force_ubuntu_repos()
