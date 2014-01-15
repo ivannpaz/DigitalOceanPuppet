@@ -1,6 +1,10 @@
 from fabric.api import *
 from fabric.contrib.project import rsync_project
 
+import hierapy
+config = hierapy.HieraPy('./hiera.yaml', './hieradata')
+#print config.get('ssh')
+
 #
 # Task: apply
 #
