@@ -1,0 +1,5 @@
+# This file is managed by puppet
+
+<% @environment.each_pair do |name, value| -%>
+export <%= @name %>="<%= @value %>"
+<% end -%>
